@@ -1,0 +1,10 @@
+<h1><%= @cocktail.name %></h1>
+<h2>Ingredients</h2>
+<ul>
+  <% @cocktail.ingredients.each do |ingredient| %>
+    <li>
+      <%= ingredient.name %> <br>
+      <p><%= ingredient.doses.where(cocktail: @cocktail).first.description %></p>
+    </li>
+  <% end %>
+</ul>
