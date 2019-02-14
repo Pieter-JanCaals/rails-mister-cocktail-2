@@ -1,10 +1,15 @@
 <h1><%= @cocktail.name %></h1>
+<%= link_to "Add new dose", new_cocktail_dose_path(@cocktail.id), class: "btn btn-primary"%>
 <h2>Ingredients</h2>
 <ul>
   <% @cocktail.ingredients.each do |ingredient| %>
     <li>
+      <% dose = ingredient.doses.where(cocktail: @cocktail).first %>
       <%= ingredient.name %> <br>
-      <p><%= ingredient.doses.where(cocktail: @cocktail).first.description %></p>
+      <p><%= dose.description %></p>
+      <%= link_to dose_path(dose.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
     </li>
   <% end %>
 </ul>
